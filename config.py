@@ -1,4 +1,5 @@
 import os
+import pymysql
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -7,7 +8,10 @@ class Config(object):
     #We used these in forms.py -> we can disable csurf requirement but it makes it less secure
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret'
 
-    #This is Database stuff
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False 
+    
+db = pymysql.connect(
+	user = 'josh',
+	password = 'SimplerTimes',
+	host = 'josh.danilafe.com',
+	db = 'scheduler'
+	)
