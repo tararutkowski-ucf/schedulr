@@ -66,6 +66,29 @@ def register():
 
     #If failed go to register page
     return "Register Page"
+
+@app.route('/home', methods=['GET'])
+def register():
+    
+    return "Home Page"
+
+@app.route('/myinfo',methods = ['GET'])
+@login_required
+def myInfo():
+
+    with db.cursor() as cursor:
+        sql = "SELECT Username,FirstName,LastName,Email FROM Users WHERE ID=%s"
+        cursor.execute(sql,(current_user.id))
+        sqlOutput = cursor.fetchone()
+
+        out = {}
+        out['Username'] = sqlOutput[0]
+        out['FirstName'] = sqlOutput[1]
+        out['LastName'] = sqlOutput[2]
+        out['Email'] = sqlOutput[3]
+
+        return(jsonify(out))
+
 @app.route('/classes', methods=['GET'])
 def classes():
     with db.cursor() as cursor:
