@@ -68,8 +68,7 @@ def register():
     return "Register Page"
 
 @app.route('/home', methods=['GET'])
-def register():
-    
+def home():
     return "Home Page"
 
 @app.route('/myinfo',methods = ['GET'])
