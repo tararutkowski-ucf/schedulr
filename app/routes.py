@@ -17,10 +17,8 @@ def load_user(id):
 @login_required
 #Index is home page- where you can see your contacts
 def index():
-
     if current_user:
         return (current_user.id)
-
     else:
         return(0)
 
@@ -30,7 +28,6 @@ def login():
     #If they are already logged in redirect to index
     if request.method == 'GET':
         return("Please login with a JSON POST")
-
 
     elif request.method == 'POST':
         if current_user.is_authenticated:
@@ -48,7 +45,7 @@ def login():
 
             else:
                 user = User(result[0][0])
-                login_user(user, remember=form['remember_me'])
+                login_user(user, remember=form['Remember_Me'])
                 return jsonify({'User': result[0][0]})
    
 
@@ -78,7 +75,6 @@ def classes():
 
         array = []
 
- 
         for item in sqlOutput:
             line = {}
             line['ID'] = item[0]
@@ -89,8 +85,3 @@ def classes():
         
         result = {'classes' : array,'count' : len(array)}
         return(jsonify(result))
-
-
-
-
-       
