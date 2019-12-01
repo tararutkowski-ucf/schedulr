@@ -1,0 +1,10 @@
+#promo {
+  text-align: center;
+  padding: 30px;
+  background-image: url(/assets/img/UCF-Best-of-2018-8.jpg);
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+  data-toggle: modal;
+}
+

@@ -78,6 +78,7 @@ def register():
 
 @app.route('/home', methods=['GET'])
 def home():
+    return render_template('home.html')
     return "Home Page"
 
 @app.route('/myinfo',methods = ['GET'])

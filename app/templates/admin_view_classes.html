@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>schedulrVUE (Backup 1575142410431) (Backup 1575171691666)</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/-Login-form-Page-BS4-.css">
+    <link rel="stylesheet" href="/assets/css/Dark-NavBar-1.css">
+    <link rel="stylesheet" href="/assets/css/Dark-NavBar-2.css">
+    <link rel="stylesheet" href="/assets/css/Dark-NavBar.css">
+    <link rel="stylesheet" href="/assets/css/Data-Table-1.css">
+    <link rel="stylesheet" href="/assets/css/Data-Table.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="/assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="/assets/css/Profile-Edit-Form-1.css">
+    <link rel="stylesheet" href="/assets/css/Profile-Edit-Form.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md sticky-top bg-info navigation-clean-button" style="height:80px;background-color:#37434d;color:#ffffff;">
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="font-size: 200%;">&nbsp;SchedulR</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" style="color:#ffffff;" href="/home.html"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" style="color:#ffffff;" href="#"><i class="fa fa-sign-in"></i>&nbsp;Sign Out</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div class="row" style="width: 100%;">
+        <div class="col d-lg-flex justify-content-lg-start align-items-lg-end">
+            <h2 class="text-left d-lg-flex justify-content-start justify-content-sm-start align-items-sm-end justify-content-md-start align-items-md-end justify-content-lg-start align-items-lg-center justify-content-xl-start" style="color: rgb(23,162,184);margin-bottom: 0px;margin-left: 5px;">Credits Obtained</h2>
+        </div>
+        <div class="col d-sm-flex d-lg-flex justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end"><button class="btn btn-primary" type="button" style="margin: 5%;margin-top: 5%;margin-right: 0px;margin-bottom: 5%;margin-left: 5%;" data-toggle="modal" data-target="#addClassModal">Add Class</button></div>
+    </div>
+    <div role="tablist" id="classTable">
+        <div class="card" v-for="user in users">
+            <div class="card-header" role="tab">
+                <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="classTable .item-1" href="#classTable .item-1">{{ user.name }}</a></h5>
+            </div>
+            <div class="collapse show item-1" role="tabpanel" data-parent="#classTable">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%;">Class</th>
+                                    <th style="width: 25%;">Code</th>
+                                    <th class="text-right" style="width: 25%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cell 1</td>
+                                    <td>Cell 2</td>
+                                    <td class="d-lg-flex justify-content-lg-end"><button class="btn btn-danger btn-sm d-sm-flex justify-content-md-end justify-content-lg-end justify-content-xl-end" type="button">Delete Class</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="addClassModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add a Class</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group"><label class="text-info">Course Prefix</label>
+                            <div class="dropdown show"><button class="btn btn-outline-dark btn-block btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Dropdown </button>
+                                <div class="dropdown-menu show" role="menu"><a class="dropdown-item" role="presentation" v-for="user in users">{{ user.name }}</a></div>
+                            </div><label class="text-info" style="margin-top: 5px;margin-bottom: 0px;">Course Title</label><input class="form-control" type="text" style="width: 466px;"></div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+            </div>
+        </div>
+    </div><script>src="admin_view_classes.js"</script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="/assets/js/admin_view_classes.js"></script>
+    <script src="/assets/js/classes_taken.js"></script>
+    <script src="/assets/js/index.js"></script>
+    <script src="/assets/js/Profile-Edit-Form.js"></script>
+    <script src="/assets/js/schedule_requests.js"></script>
+    <script src="/assets/js/view_results.js"></script>
+    <script src="/assets/js/view_schedule.js"></script>
+</body>
+
+</html>
