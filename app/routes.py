@@ -1,4 +1,4 @@
-from flask import render_template,redirect, url_for, request, jsonify
+from flask import render_template,redirect, url_for, request, jsonify, send_from_directory
 from app import app, db, login
 from flask_login import current_user, login_user, logout_user, login_required, UserMixin
 from werkzeug.urls import url_parse
@@ -13,10 +13,19 @@ class User(UserMixin):
 def load_user(id):
     return User(id)
 
+@app.route('/assets/<path:filename>/')
+def static_subdir(filename=None):
+    print(filename);
+    directory = 'assets'
+    return send_from_directory(directory, filename)
+
 @app.route('/', methods=['GET', 'POST'])
-@login_required
+#@login_required
 #Index is home page- where you can see your contacts
 def index():
+
+    return(render_template('index.html'))
+
     if current_user:
         return (current_user.id)
     else:
@@ -74,7 +83,6 @@ def home():
 @app.route('/myinfo',methods = ['GET'])
 @login_required
 def myInfo():
-
     with db.cursor() as cursor:
         sql = "SELECT Username,FirstName,LastName,Email FROM Users WHERE ID=%s"
         cursor.execute(sql,(current_user.id))
@@ -87,6 +95,31 @@ def myInfo():
         out['Email'] = sqlOutput[3]
 
         return(jsonify(out))
+
+@app.route('/myclasses',methods = ['GET'])
+@login_required
+def myClasses():
+    with db.cursor() as cursor:
+        sqlSelect0 = "Select Classes.Name, Classes.Code,Classes.Hours,Classes_Taken.YearTaken,"
+        sqlSelect1 = "Classes_Taken.Semester, Classes_Taken.Grade "
+        sqlFrom = "From Classes_Taken JOIN Classes ON Classes_Taken.ClassID = Classes.ID "
+        sqlWhere = "Where Classes_Taken.UserID=%s"
+        cursor.execute(sqlSelect0 + sqlSelect1 + sqlFrom + sqlWhere,(current_user.id))
+        sqlOutput = cursor.fetchall()
+
+        array = [];
+
+        for item in sqlOutput:
+            out = {}
+            out['ClassName'] = item[0]
+            out['ClassCode'] = item[1]
+            out['Hours'] = item[2]
+            out['Year'] = item[3]
+            out['Semester'] = item[4]
+            out['Grade'] = item[5]
+            array.append(out)
+
+        return(jsonify(array))
 
 @app.route('/classes', methods=['GET'])
 def classes():
