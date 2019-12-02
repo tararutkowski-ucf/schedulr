@@ -10,7 +10,7 @@ var indexLogin = new Vue({
     
     methods: {
         getHomePage() {
-             axios.get('http://josh.danilafe.com/home')
+             axios.get('/home')
                  .then(response=> {
                  info = response;
                  console.log(info);
@@ -19,7 +19,7 @@ var indexLogin = new Vue({
         
         loginSubmit() {
             this.errors = [];
-            axios.post(`http://josh.danilafe.com/login`,{
+            axios.post(`/login`,{
                 Username: this.form.email,
                 Password: this.form.password,
                 Remember_Me: 'true'
@@ -29,15 +29,12 @@ var indexLogin = new Vue({
                 if (response.data.User == 0)
                 {
                     this.errors.push("Username or Password are incorrect");
+                    console.log("You suck");
                 }
                 else
                 {
                     console.log("we're in!");
-                    axios.get('http://josh.danilafe.com/home')
-                        .then(response=> {
-                        info = response;
-                        console.log(info);
-                        })
+                        window.location.href = "/home";
                     
                 }
             })

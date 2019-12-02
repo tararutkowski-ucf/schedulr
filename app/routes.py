@@ -24,7 +24,10 @@ def static_subdir(filename=None):
 #Index is home page- where you can see your contacts
 def index():
 
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     return(render_template('index.html'))
+
 
     if current_user:
         return (current_user.id)
@@ -57,13 +60,20 @@ def login():
                 login_user(user, remember=form['Remember_Me'])
                 return jsonify({'User': result[0][0]})
    
-
+# View Profile Information
+@app.route('/profile', methods=['GET'])
+def profile():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    return render_template('profile.html')
+    
+    
 #Logout
 @app.route('/logout')
 def logout():
     #just use logout user function and redirect to login
     logout_user()
-    return "Logged out"
+    return redirect(url_for('index'))
 
 #Register user
 @app.route('/register', methods=['GET', 'POST'])
@@ -78,7 +88,8 @@ def register():
 
 @app.route('/home', methods=['GET'])
 def home():
-    return render_template('home.html')
+    if current_user.is_authenticated:
+        return render_template('home.html')
     return "Home Page"
 
 @app.route('/myinfo',methods = ['GET'])
